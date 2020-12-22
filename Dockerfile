@@ -1,7 +1,9 @@
+# set Nextcloud version
+ARG NCVERSION=nextcloud:20-apache
 #
 # Use a temporary image to compile and test the libraries
 #
-FROM nextcloud:apache as builder
+FROM $NCVERSION as builder
 
 # Build and install dlib on builder
 
@@ -54,7 +56,7 @@ RUN git clone https://github.com/matiasdelellis/pdlib-min-test-suite.git \
 # If pass the tests, we are able to create the final image.
 #
 
-FROM nextcloud:apache
+FROM $NCVERSION
 
 # Install dependencies to image
 
