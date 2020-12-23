@@ -61,7 +61,9 @@ FROM $NCVERSION
 # Install dependencies to image
 
 RUN apt-get update ; \
-    apt-get install -y libopenblas-base
+    apt-get install -y libopenblas-base libbz2-dev
+
+RUN docker-php-ext-install bz2
 
 # Install dlib and PDlib to image
 
@@ -77,7 +79,7 @@ RUN echo "extension=pdlib.so" > /usr/local/etc/php/conf.d/pdlib.ini
 
 # Increse memory limits
 
-RUN echo memory_limit=1024M > /usr/local/etc/php/conf.d/memory-limit.ini
+RUN echo memory_limit=4096M > /usr/local/etc/php/conf.d/memory-limit.ini
 
 # Pdlib is already installed, now without all build dependencies.
 # You could test again if everything is correct, uncommenting the next lines
